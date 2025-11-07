@@ -20,12 +20,12 @@ export default async function Home({
     const cookieStore = await cookies()
 
     if (action === "toggleXSS") {
-        let curr = cookieStore.get("XSSEnabled")?.value;
+        const curr = cookieStore.get("XSSEnabled")?.value;
         cookieStore.set({name: "XSSEnabled", value: curr == "enabled" ? "disabled" : "enabled"});
     }
 
     if (action === "toggleSDE") {
-        let curr = cookieStore.get("SDEEnabled")?.value;
+        const curr = cookieStore.get("SDEEnabled")?.value;
         cookieStore.set({name: "SDEEnabled", value: curr == "enabled" ? "disabled" : "enabled"});
     }
 
